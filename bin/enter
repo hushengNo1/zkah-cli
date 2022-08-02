@@ -1,0 +1,52 @@
+#! /usr/bin/env node
+// @ts-nocheck
+const chalk = require('chalk');
+const program = require('commander');
+const figlet = require('figlet');
+
+program
+  .command('create <project-name>') // 增加创建指令
+  .description('create a new project') // 添加描述信息
+  .option('-f, --force', 'overwrite target directory if it exists') // 强制覆盖
+  .action((projectName, cmd) => {
+    require('../lib/create')(projectName, cmd);
+  });
+
+program
+  .command('config [value]') // config 命令
+  .description('inspect and modify the config')
+  .option('-g, --get <key>', 'get value by key')
+  .option('-s, --set <key> <value>', 'set option[key] is value')
+  .option('-d, --delete <key>', 'delete option by key')
+  .action((value, keys) => {
+    // value 可以取到 [value] 值，keys会获取到命令参数
+    console.log(value, keys);
+  });
+
+program.on('--help', function () {
+  console.log(
+    '\r\n' +
+      figlet.textSync('zkah-cli', {
+        font: '3D-ASCII',
+        horizontalLayout: 'default',
+        verticalLayout: 'default',
+        width: 120,
+        whitespaceBreak: true,
+      })
+  );
+  // 前后两个空行调整格式，更舒适
+  console.log();
+  console.log(
+    `Run ${chalk.cyan(
+      'zkah-cli <command> --help'
+    )} for detailed usage of given command.`
+  );
+  console.log();
+});
+
+program
+  .name('zkah-cli')
+  .usage(`<command> [option]`)
+  .version(`zkah-cli ${require('../package.json').version}`);
+
+program.parse(process.argv);
