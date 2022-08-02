@@ -1,6 +1,6 @@
 {
   "name": "zkah-cli",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
   "bin": {
@@ -10,10 +10,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": [
+    "cli",
+    "zkah-cli",
+    "脚手架",
+    "快速搭建项目"
+  ],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
     "axios": "^0.27.2",
     "chalk": "4.0.0",
     "commander": "^9.4.0",
